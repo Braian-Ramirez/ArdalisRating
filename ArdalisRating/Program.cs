@@ -4,9 +4,12 @@ namespace ArdalisRating
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
-            Console.WriteLine("Ardalis Insurance Rating System Starting...");
+            Dialogue dialogue = new Dialogue();
+
+            dialogue.ardalisInsurance();
 
             var engine = new RatingEngine();
             engine.Rate();

@@ -12,14 +12,17 @@ namespace ArdalisRating
     {
         LifePolicy lifePolicy = new LifePolicy();
         LandPolicy landPolicy = new LandPolicy();
-        AutoPolicy autoPolicy = new AutoPolicy();   
-        ConvertToPolicy loadPolicy = new ConvertToPolicy(); 
+        AutoPolicy autoPolicy = new AutoPolicy();
+        Flood floadPolicy = new Flood();
+        ConvertToPolicy loadPolicy = new ConvertToPolicy();
+        Flood flood = new Flood();  
+        Dialogue dialogue = new Dialogue();
         
         public decimal Rating { get; set; }
 
         public void Rate()
         {
-            Console.WriteLine("Starting rate.");
+            dialogue.startingRate();
             var policy = loadPolicy.LoadPolicy();
 
             switch (policy.Type)
@@ -36,12 +39,17 @@ namespace ArdalisRating
                     lifePolicy.RateLifePolicy(policy);
                     Rating = lifePolicy.Rating;
                     break;
+                case PolicyType.Flood:
+                    flood.RateFloodPolicy(policy);
+                    Rating = floadPolicy.Rating;
+                    break;
+
                 default:
-                    Console.WriteLine("Unknown policy type");
+                    dialogue.unknownPolicy();
                     break;
             }
 
-            Console.WriteLine("Rating completed.");
+            dialogue.ratingCompleted();
         }
     }
 }
